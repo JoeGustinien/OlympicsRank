@@ -8,21 +8,28 @@
 </head>
 <body>
     <h1>Tableau des médailles olympiques</h1>
-    <table id="medalsTable">
-        <thead>
-            <tr>
-                <th>Rang</th>
-                <th>Pays</th>
-                <th>Or</th>
-                <th>Argent</th>
-                <th>Bronze</th>
-                <th>Total</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Les données seront insérées ici par JavaScript -->
-        </tbody>
-    </table>
+    <div class="sorting-options">
+        <button id="sortTotal">Trier par total</button>
+        <button id="sortWeighted">Trier pondéré</button>
+        <button id="sortGold">Trier par or</button>
+    </div>
+    <div class="table-container">
+        <table id="medalsTable">
+            <thead>
+                <tr>
+                    <th class="rank">Rang</th>
+                    <th class="country">Pays</th>
+                    <th class="gold">Or</th>
+                    <th class="silver">Argent</th>
+                    <th class="bronze">Bronze</th>
+                    <th class="total">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Les données seront insérées ici par JavaScript -->
+            </tbody>
+        </table>
+    </div>
 
     <script src="script.js"></script>
 </body>
