@@ -1,6 +1,64 @@
 // Variables globales
 let medalsData = null;
 
+// Table de correspondance entre les codes NOC et les codes ISO 3166-1 alpha-2
+const nocToIso = {
+    USA: 'US',
+    FRA: 'FR',
+    GBR: 'GB',
+    CHN: 'CN',
+    JPN: 'JP',
+    AUS: 'AU',
+    ITA: 'IT',
+    KOR: 'KR',
+    CAN: 'CA',
+    BRA: 'BR',
+    GER: 'DE',
+    HKG: 'HK',
+    KAZ: 'KZ',
+    RSA: 'ZA',
+    POL: 'PL',
+    SWE: 'SE',
+    NED: 'NL',
+    NZL: 'NZ',
+    BEL: 'BE',
+    IRL: 'IE',
+    PRK: 'KP',
+    KOS: 'XK',
+    MEX: 'MX',
+    SUI: 'CH',
+    TUR: 'TR',
+    IND: 'IN',
+    MDA: 'MD',
+    ARG: 'AR',
+    AZE: 'AZ',
+    ROU: 'RO',
+    SLO: 'SI',
+    SRB: 'RS',
+    UZB: 'UZ',
+    FIJ: 'FJ',
+    GEO: 'GE',
+    MGL: 'MN',
+    TUN: 'TN',
+    CRO: 'HR',
+    EGY: 'EG',
+    ESP: 'ES',
+    GUA: 'GT',
+    HUN: 'HU',
+    SVK: 'SK',
+    TJK: 'TJ',
+    UKR: 'UA',
+};
+
+// Fonction pour convertir un code ISO 3166-1 alpha-2 en emoji drapeau
+function isoToFlagEmoji(isoCode) {
+    return isoCode
+        .toUpperCase()
+        .split('')
+        .map(char => String.fromCodePoint(char.charCodeAt(0) + 127397))
+        .join('');
+}
+
 // Fonction pour récupérer les données de l'API
 async function fetchMedalsData() {
     try {
@@ -15,28 +73,9 @@ async function fetchMedalsData() {
 }
 
 // Fonction pour obtenir l'emoji du pays à partir du code NOC
-async function getCountryEmoji(countryCode) {
-    try {
-        console.log(`Récupération de l'emoji pour ${countryCode}`);
-        const response = await fetch('https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/index.json');
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        
-        const country = data.find(c => c.code === countryCode.toUpperCase());
-        
-        if (country) {
-            console.log(`Emoji trouvé pour ${countryCode}:`, country.emoji);
-            return country.emoji;
-        } else {
-            console.warn(`Emoji non trouvé pour le code : ${countryCode}`);
-            return '🏳️';
-        }
-    } catch (error) {
-        console.error(`Erreur lors de la récupération de l'emoji pour le code ${countryCode}:`, error);
-        return '🏳️';
-    }
+function getCountryEmoji(noc) {
+    const isoCode = nocToIso[noc];
+    return isoCode ? isoToFlagEmoji(isoCode) : '🏳️';
 }
 
 // Fonction pour trier les données
@@ -68,11 +107,11 @@ async function populateTable(sortType = 'total') {
         tableBody.innerHTML = '';
         for (let i = 0; i < sortedData.length; i++) {
             const country = sortedData[i];
+            const countryCode = country.noc;
+            const countryEmoji = getCountryEmoji(countryCode);
             const row = tableBody.insertRow();
-            const countryCode = country.code || '';
-            const countryEmoji = await getCountryEmoji(countryCode);
             row.innerHTML = `
-                 <td class="rank">${i + 1}</td>
+                <td class="rank">${i + 1}</td>
                 <td class="country">${countryEmoji} ${country.description}</td>
                 <td class="gold">🥇 ${country.gold}</td>
                 <td class="silver">🥈 ${country.silver}</td>
