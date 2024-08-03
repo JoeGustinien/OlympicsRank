@@ -3,52 +3,213 @@ let medalsData = null;
 
 // Table de correspondance entre les codes NOC et les codes ISO 3166-1 alpha-2
 const nocToIso = {
-    USA: 'US',
-    FRA: 'FR',
-    GBR: 'GB',
-    CHN: 'CN',
-    JPN: 'JP',
-    AUS: 'AU',
-    ITA: 'IT',
-    KOR: 'KR',
-    CAN: 'CA',
-    BRA: 'BR',
-    GER: 'DE',
-    HKG: 'HK',
-    KAZ: 'KZ',
-    RSA: 'ZA',
-    POL: 'PL',
-    SWE: 'SE',
-    NED: 'NL',
-    NZL: 'NZ',
-    BEL: 'BE',
-    IRL: 'IE',
-    PRK: 'KP',
-    KOS: 'XK',
-    MEX: 'MX',
-    SUI: 'CH',
-    TUR: 'TR',
-    IND: 'IN',
-    MDA: 'MD',
-    ARG: 'AR',
-    AZE: 'AZ',
-    ROU: 'RO',
-    SLO: 'SI',
-    SRB: 'RS',
-    UZB: 'UZ',
-    FIJ: 'FJ',
-    GEO: 'GE',
-    MGL: 'MN',
-    TUN: 'TN',
-    CRO: 'HR',
-    EGY: 'EG',
-    ESP: 'ES',
-    GUA: 'GT',
-    HUN: 'HU',
-    SVK: 'SK',
-    TJK: 'TJ',
-    UKR: 'UA',
+    AFG: 'AF', // Afghanistan
+    ALB: 'AL', // Albania
+    ALG: 'DZ', // Algeria
+    AND: 'AD', // Andorra
+    ANG: 'AO', // Angola
+    ANT: 'AG', // Antigua and Barbuda
+    ARG: 'AR', // Argentina
+    ARM: 'AM', // Armenia
+    ARU: 'AW', // Aruba
+    ASA: 'AS', // American Samoa
+    AUS: 'AU', // Australia
+    AUT: 'AT', // Austria
+    AZE: 'AZ', // Azerbaijan
+    BAH: 'BS', // Bahamas
+    BAN: 'BD', // Bangladesh
+    BAR: 'BB', // Barbados
+    BDI: 'BI', // Burundi
+    BEL: 'BE', // Belgium
+    BEN: 'BJ', // Benin
+    BER: 'BM', // Bermuda
+    BHU: 'BT', // Bhutan
+    BIH: 'BA', // Bosnia and Herzegovina
+    BIZ: 'BZ', // Belize
+    BLR: 'BY', // Belarus
+    BOL: 'BO', // Bolivia
+    BOT: 'BW', // Botswana
+    BRA: 'BR', // Brazil
+    BRN: 'BN', // Brunei Darussalam
+    BRU: 'BG', // Bulgaria
+    BUL: 'BG', // Bulgaria
+    BUR: 'BF', // Burkina Faso
+    CAF: 'CF', // Central African Republic
+    CAM: 'KH', // Cambodia
+    CAN: 'CA', // Canada
+    CAY: 'KY', // Cayman Islands
+    CGO: 'CG', // Congo
+    CHA: 'TD', // Chad
+    CHI: 'CL', // Chile
+    CHN: 'CN', // China
+    CIV: 'CI', // Côte d'Ivoire
+    CMR: 'CM', // Cameroon
+    COD: 'CD', // Democratic Republic of the Congo
+    COK: 'CK', // Cook Islands
+    COL: 'CO', // Colombia
+    COM: 'KM', // Comoros
+    CPV: 'CV', // Cape Verde
+    CRC: 'CR', // Costa Rica
+    CRO: 'HR', // Croatia
+    CUB: 'CU', // Cuba
+    CYP: 'CY', // Cyprus
+    CZE: 'CZ', // Czech Republic
+    DEN: 'DK', // Denmark
+    DJI: 'DJ', // Djibouti
+    DMA: 'DM', // Dominica
+    DOM: 'DO', // Dominican Republic
+    ECU: 'EC', // Ecuador
+    EGY: 'EG', // Egypt
+    ERI: 'ER', // Eritrea
+    ESA: 'SV', // El Salvador
+    ESP: 'ES', // Spain
+    EST: 'EE', // Estonia
+    ETH: 'ET', // Ethiopia
+    FIJ: 'FJ', // Fiji
+    FIN: 'FI', // Finland
+    FRA: 'FR', // France
+    FSM: 'FM', // Micronesia
+    GAB: 'GA', // Gabon
+    GAM: 'GM', // Gambia
+    GBR: 'GB', // Great Britain
+    GBS: 'GW', // Guinea-Bissau
+    GEO: 'GE', // Georgia
+    GEQ: 'GQ', // Equatorial Guinea
+    GER: 'DE', // Germany
+    GHA: 'GH', // Ghana
+    GRE: 'GR', // Greece
+    GRN: 'GD', // Grenada
+    GUA: 'GT', // Guatemala
+    GUI: 'GN', // Guinea
+    GUM: 'GU', // Guam
+    GUY: 'GY', // Guyana
+    HAI: 'HT', // Haiti
+    HKG: 'HK', // Hong Kong
+    HON: 'HN', // Honduras
+    HUN: 'HU', // Hungary
+    INA: 'ID', // Indonesia
+    IND: 'IN', // India
+    IRI: 'IR', // Iran
+    IRL: 'IE', // Ireland
+    IRQ: 'IQ', // Iraq
+    ISL: 'IS', // Iceland
+    ISR: 'IL', // Israel
+    ISV: 'VI', // Virgin Islands
+    ITA: 'IT', // Italy
+    IVB: 'VG', // British Virgin Islands
+    JAM: 'JM', // Jamaica
+    JOR: 'JO', // Jordan
+    JPN: 'JP', // Japan
+    KAZ: 'KZ', // Kazakhstan
+    KEN: 'KE', // Kenya
+    KGZ: 'KG', // Kyrgyzstan
+    KIR: 'KI', // Kiribati
+    KOR: 'KR', // Korea
+    KOS: 'XK', // Kosovo
+    KSA: 'SA', // Saudi Arabia
+    KUW: 'KW', // Kuwait
+    LAO: 'LA', // Laos
+    LAT: 'LV', // Latvia
+    LBA: 'LY', // Libya
+    LBR: 'LR', // Liberia
+    LCA: 'LC', // Saint Lucia
+    LES: 'LS', // Lesotho
+    LIB: 'LB', // Lebanon
+    LIE: 'LI', // Liechtenstein
+    LTU: 'LT', // Lithuania
+    LUX: 'LU', // Luxembourg
+    MAD: 'MG', // Madagascar
+    MAR: 'MA', // Morocco
+    MAS: 'MY', // Malaysia
+    MAW: 'MW', // Malawi
+    MDA: 'MD', // Moldova
+    MDV: 'MV', // Maldives
+    MEX: 'MX', // Mexico
+    MGL: 'MN', // Mongolia
+    MHL: 'MH', // Marshall Islands
+    MKD: 'MK', // North Macedonia
+    MLI: 'ML', // Mali
+    MLT: 'MT', // Malta
+    MNE: 'ME', // Montenegro
+    MON: 'MC', // Monaco
+    MOZ: 'MZ', // Mozambique
+    MRI: 'MU', // Mauritius
+    MTN: 'MR', // Mauritania
+    MYA: 'MM', // Myanmar
+    NAM: 'NA', // Namibia
+    NCA: 'NI', // Nicaragua
+    NED: 'NL', // Netherlands
+    NEP: 'NP', // Nepal
+    NGR: 'NG', // Nigeria
+    NIG: 'NE', // Niger
+    NOR: 'NO', // Norway
+    NRU: 'NR', // Nauru
+    NZL: 'NZ', // New Zealand
+    OMA: 'OM', // Oman
+    PAK: 'PK', // Pakistan
+    PAN: 'PA', // Panama
+    PAR: 'PY', // Paraguay
+    PER: 'PE', // Peru
+    PHI: 'PH', // Philippines
+    PLE: 'PS', // Palestine
+    PLW: 'PW', // Palau
+    PNG: 'PG', // Papua New Guinea
+    POL: 'PL', // Poland
+    POR: 'PT', // Portugal
+    PRK: 'KP', // North Korea
+    PUR: 'PR', // Puerto Rico
+    QAT: 'QA', // Qatar
+    ROU: 'RO', // Romania
+    RSA: 'ZA', // South Africa
+    RUS: 'RU', // Russia
+    RWA: 'RW', // Rwanda
+    SAM: 'WS', // Samoa
+    SEN: 'SN', // Senegal
+    SEY: 'SC', // Seychelles
+    SGP: 'SG', // Singapore
+    SKN: 'KN', // Saint Kitts and Nevis
+    SLE: 'SL', // Sierra Leone
+    SLO: 'SI', // Slovenia
+    SMR: 'SM', // San Marino
+    SOL: 'SB', // Solomon Islands
+    SOM: 'SO', // Somalia
+    SRB: 'RS', // Serbia
+    SRI: 'LK', // Sri Lanka
+    SSD: 'SS', // South Sudan
+    STP: 'ST', // Sao Tome and Principe
+    SUD: 'SD', // Sudan
+    SUI: 'CH', // Switzerland
+    SUR: 'SR', // Suriname
+    SVK: 'SK', // Slovakia
+    SWE: 'SE', // Sweden
+    SWZ: 'SZ', // Eswatini
+    SYR: 'SY', // Syria
+    TAN: 'TZ', // Tanzania
+    TGA: 'TO', // Tonga
+    THA: 'TH', // Thailand
+    TJK: 'TJ', // Tajikistan
+    TKM: 'TM', // Turkmenistan
+    TLS: 'TL', // Timor-Leste
+    TOG: 'TG', // Togo
+    TPE: 'TW', // Chinese Taipei
+    TTO: 'TT', // Trinidad and Tobago
+    TUN: 'TN', // Tunisia
+    TUR: 'TR', // Turkey
+    TUV: 'TV', // Tuvalu
+    UAE: 'AE', // United Arab Emirates
+    UGA: 'UG', // Uganda
+    UKR: 'UA', // Ukraine
+    URU: 'UY', // Uruguay
+    USA: 'US', // United States
+    UZB: 'UZ', // Uzbekistan
+    VAN: 'VU', // Vanuatu
+    VEN: 'VE', // Venezuela
+    VIE: 'VN', // Vietnam
+    YEM: 'YE', // Yemen
+    ZAM: 'ZM', // Zambia
+    ZIM: 'ZW', // Zimbabwe
 };
+
 
 // Fonction pour convertir un code ISO 3166-1 alpha-2 en emoji drapeau
 function isoToFlagEmoji(isoCode) {
