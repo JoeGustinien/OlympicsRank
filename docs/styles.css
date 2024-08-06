@@ -3,12 +3,12 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 20px;
-    background-color: #f0f0f0;
+    background-color: #f5f5f5;
 }
 
 h1 {
     text-align: center;
-    color: #333;
+    color: #00274d; /* Dark Blue */
     font-size: 2em;
 }
 
@@ -22,14 +22,14 @@ button {
     margin: 0 5px 10px;
     font-size: 16px;
     cursor: pointer;
-    background-color: #0066cc;
+    background-color: #22ABA3; /* Blue */
     color: white;
     border: none;
     border-radius: 5px;
 }
 
 button:hover {
-    background-color: #0052a3;
+    background-color: #043D57; /* Darker Blue */
 }
 
 .table-container {
@@ -52,7 +52,7 @@ th, td {
 }
 
 th {
-    background-color: #0066cc;
+    background-color: #22ABA3; /* Dark Blue */
     color: white;
     font-weight: bold;
 }
